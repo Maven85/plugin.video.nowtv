@@ -318,6 +318,20 @@ def get_now_structure(menu_level, result, country_code):
                     "genre": i["genres"][0]["title"] if len(i.get("genres", [])) > 0 else None,
                     "type": "vod"
                 })
+            elif menu_level == "continue" and i["type"] == "ASSET/EPISODE":
+                d.append({
+                    "title": f'[COLOR yellowgreen][B]{i["title"]} | S{i["seasonNumber"]}E{i["episodeNumber"]}:[/B][/COLOR] {i["episodeTitle"].replace("Ep " + str(i["episodeNumber"]), "").strip()}',
+                    "director": i.get("directors", []),
+                    "actor": i.get("cast", []),
+                    "desc": i.get("synopsisLong"),
+                    "location": i["providerVariantId"],
+                    "duration": i["durationSeconds"],
+                    "t_img": img_provider(i.get("images"), "episode"),
+                    "f_img": img_provider(i.get("images"), "landscape"),
+                    'year': i.get("year"), 
+                    "genre": i["genres"][0]["title"] if len(i.get("genres", [])) > 0 else None,
+                    "type": "vod"
+                })
             else:
                 d.append({
                     "title": i["title"],
